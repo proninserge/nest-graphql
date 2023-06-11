@@ -1,0 +1,49 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""Flavor model"""
+type FlavorEntity {
+  id: ID!
+  name: String!
+  coffees: [CoffeeEntity!]!
+}
+
+"""Coffee model"""
+type CoffeeEntity {
+  id: ID!
+  name: String!
+  brand: String!
+  flavors: [FlavorEntity!]!
+  createdAt: Date
+}
+
+"""Date custom scalar type"""
+scalar Date
+
+type Query {
+  coffees: [CoffeeEntity!]!
+  coffee(id: ID!): CoffeeEntity!
+}
+
+type Mutation {
+  createCoffee(createCoffeeDTO: CreateCoffeeDTO!): CoffeeEntity!
+  updateCoffee(id: Float!, updateCoffeeDTO: UpdateCoffeeDTO!): CoffeeEntity!
+  removeCoffee(id: Float!): CoffeeEntity!
+}
+
+"""Object to create Coffee"""
+input CreateCoffeeDTO {
+  """Name of a Coffee"""
+  name: String!
+  brand: String!
+  flavors: [String!]!
+}
+
+"""Object to update Coffee"""
+input UpdateCoffeeDTO {
+  """Name of a Coffee"""
+  name: String
+  brand: String
+  flavors: [String!]
+}

@@ -10,9 +10,6 @@ import {TypeOrmModule} from "@nestjs/typeorm";
 import ormconfig from "../ormconfig";
 import {DateScalar} from "./common/scalars/date.scalar";
 import {TeaEntity} from "./teas/entities/tea.entity";
-import { DrinksResolver } from './drinks/drinks.resolver';
-import { DrinksService } from './drinks/drinks.service';
-import {CoffeesService} from "./coffees/coffees.service";
 import { DrinksModule } from './drinks/drinks.module';
 import { PubSubModule } from './pub-sub/pub-sub.module';
 

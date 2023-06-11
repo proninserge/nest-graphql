@@ -6,11 +6,13 @@ import {In, Repository} from "typeorm";
 import DataLoader from "dataloader";
 
 @Injectable({scope: Scope.REQUEST})
-export class FlavorsByCoffeeLoader extends DataLoader<number, FlavorEntity[]> { // coffeeId
+export class FlavorsByCoffeeLoader { // coffeeId
+
+    private loader: DataLoader<number, FlavorEntity[]>
     constructor(
         @InjectRepository(CoffeeEntity) private readonly coffeesRepository: Repository<CoffeeEntity>
     ) {
-        super(keys => this.batchLoadFn(keys));
+        this.loader = new DataLoader(keys => this.batchLoadFn(keys));
     }
 
     private async batchLoadFn(
@@ -26,5 +28,9 @@ export class FlavorsByCoffeeLoader extends DataLoader<number, FlavorEntity[]> { 
             }
         });
         return coffeesWithFlavors.map(coffee => coffee.flavors);
+    }
+
+    async load(key: number): Promise<FlavorEntity[]> {
+        return this.loader.load(key);
     }
 }

@@ -8,7 +8,8 @@ const config: DataSourceOptions = {
     password: 'pass123',
     database: 'postgres',
     synchronize: true,
-    entities: [__dirname + '/**/*.entity{.ts,.js}']
+    entities: [__dirname + '/**/*.entity{.ts,.js}'],
+    logging: ['query']
 };
 
 export const dataSource = new DataSource(config);

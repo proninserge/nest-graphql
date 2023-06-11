@@ -1,7 +1,7 @@
 import {Parent, ResolveField, Resolver} from '@nestjs/graphql';
+import {FlavorsByCoffeeLoader} from "./data-loader/flavors-by-coffee.loader";
 import {CoffeeEntity} from "./entities/coffee.entity";
 import {FlavorEntity} from "./entities/flavor.entity";
-import {FlavorsByCoffeeLoader} from "./data-loader/flavors-by-coffee.loader";
 
 // name of a relation
 @Resolver(() => CoffeeEntity) // parent class

@@ -67,3 +67,7 @@ input UpdateCoffeeDTO {
   flavors: [String!]
   type: CoffeeType
 }
+
+type Subscription {
+  coffeeAdded: CoffeeEntity!
+}

@@ -10,12 +10,27 @@ type FlavorEntity {
 }
 
 """Coffee model"""
-type CoffeeEntity {
-  id: ID!
+type CoffeeEntity implements Drink {
   name: String!
+  id: ID!
   brand: String!
   flavors: [FlavorEntity!]!
   createdAt: Date
+  type: CoffeeType!
+}
+
+interface Drink {
+  name: String!
+}
+
+enum CoffeeType {
+  ARABICA
+  ROBUSTA
+}
+
+"""Tea model"""
+type TeaEntity implements Drink {
+  name: String!
 }
 
 """Date custom scalar type"""
@@ -24,7 +39,10 @@ scalar Date
 type Query {
   coffees: [CoffeeEntity!]!
   coffee(id: ID!): CoffeeEntity!
+  drinks: [DrinksResult!]!
 }
+
+union DrinksResult = CoffeeEntity | TeaEntity
 
 type Mutation {
   createCoffee(createCoffeeDTO: CreateCoffeeDTO!): CoffeeEntity!
@@ -38,6 +56,7 @@ input CreateCoffeeDTO {
   name: String!
   brand: String!
   flavors: [String!]!
+  type: CoffeeType!
 }
 
 """Object to update Coffee"""
@@ -46,4 +65,5 @@ input UpdateCoffeeDTO {
   name: String
   brand: String
   flavors: [String!]
+  type: CoffeeType
 }

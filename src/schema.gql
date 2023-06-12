@@ -33,6 +33,16 @@ type TeaEntity implements Drink {
   name: String!
 }
 
+type User {
+  id: Int!
+  username: String!
+}
+
+type LoginResponseDTO {
+  access_token: String!
+  user: User!
+}
+
 """Date custom scalar type"""
 scalar Date
 
@@ -40,6 +50,8 @@ type Query {
   coffees: [CoffeeEntity!]!
   coffee(id: ID!): CoffeeEntity!
   drinks: [DrinksResult!]!
+  users: [User!]!
+  user(username: String!): User!
 }
 
 union DrinksResult = CoffeeEntity | TeaEntity
@@ -48,6 +60,8 @@ type Mutation {
   createCoffee(createCoffeeDTO: CreateCoffeeDTO!): CoffeeEntity!
   updateCoffee(id: Float!, updateCoffeeDTO: UpdateCoffeeDTO!): CoffeeEntity!
   removeCoffee(id: Float!): CoffeeEntity!
+  login(inputDTO: LoginInputDTO!): LoginResponseDTO!
+  signup(inputDTO: LoginInputDTO!): User!
 }
 
 """Object to create Coffee"""
@@ -66,6 +80,11 @@ input UpdateCoffeeDTO {
   brand: String
   flavors: [String!]
   type: CoffeeType
+}
+
+input LoginInputDTO {
+  username: String!
+  password: String!
 }
 
 type Subscription {

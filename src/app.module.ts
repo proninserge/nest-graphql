@@ -12,6 +12,8 @@ import {DateScalar} from "./common/scalars/date.scalar";
 import {TeaEntity} from "./teas/entities/tea.entity";
 import { DrinksModule } from './drinks/drinks.module';
 import { PubSubModule } from './pub-sub/pub-sub.module';
+import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -29,6 +31,8 @@ import { PubSubModule } from './pub-sub/pub-sub.module';
       CoffeesModule,
       DrinksModule,
       PubSubModule,
+      UsersModule,
+      AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService, DateScalar],
